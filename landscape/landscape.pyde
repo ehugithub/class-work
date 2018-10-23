@@ -31,7 +31,6 @@ def draw():
     sun += 1
     
     fill(240, 196, 32)
-    #fill(254, 252, 215)
     ellipse(moon, 100, 200, 200)
     moon += 1
 
