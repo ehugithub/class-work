@@ -30,14 +30,13 @@ def draw():
     ellipse(sun, 200, 200, 200)
     sun += 1
     
-    fill(240, 196, 32)
+    fill(254,252,215)
     ellipse(moon, 100, 200, 200)
     moon += 1
 
     if sun == 1466:
         moon = -10
-    
-    if moon == 1466:
+    elif moon == 1466:
         sun = -10
         
     fill(196,188,188)
@@ -51,7 +50,7 @@ def draw():
     triangle(1023, 150, 1130, 150, 4*width/5, 50)
     
     noStroke()
-    fill(255)
+    fill(216,237,242)
     ellipse(x,120,100,50)
     ellipse(x + 50, 150, 110, 50)
     ellipse(x - 60, 150, 120, 50)

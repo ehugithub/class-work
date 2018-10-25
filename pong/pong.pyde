@@ -3,7 +3,10 @@ def setup():
   background(255)
 
 location = PVector(683, 355)
-velocity = PVector(20, 30)
+velocity = PVector(40, 40)
+
+#class paddle:
+
 
 def  draw():
     global velocity
@@ -16,4 +19,4 @@ def  draw():
     if ((location.x > width - 30) or (location.x < 20)):
         velocity.x *= -1
     if ((location.y > height - 30) or (location.y < 20)):
-        velocity.y *=  -1
+        velocity.y *= -1
