@@ -6,8 +6,9 @@ def setup():
 location = PVector(683, 350)
 velocity = PVector(10, 10)
 
-class paddle:
-    rect(    
+'''class paddle:
+    
+    rect(    '''
 
 left = 0
 right = 0
@@ -15,11 +16,11 @@ def score_point():
     global right
     global left
     global location
-    if location.x > width - 20:
+    if location.x > width + 20:
         right += 1
         location = PVector(width/2, height/2)
         delay(300)
-    elif location.x < 20:
+    elif location.x < -20:
         left+= 1
         location = PVector(width/2, height/2)
         delay(300)
@@ -36,7 +37,7 @@ def  draw():
     fill(0)
     ellipse(location.x,location.y,40,40)
     location.add(velocity)
-    if location.x > width - 10 or location.x < 20:
+    if location.x > width + 20 or location.x < -20:
         velocity.x *= -1
-    if location.y > height - 30 or location.y < 20:
+    if location.y > height - 20 or location.y < 20:
         velocity.y *= -1 '''
