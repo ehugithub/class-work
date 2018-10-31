@@ -1,36 +1,33 @@
 import random
-import time
 
 def setup():
     size(1366,700)
 
 r = g = b = None
-switch = 1
-
+switch = True
 
 def mousePressed():
     global switch
-    if switch == 1:
-        switch = 0
+    if switch == True:
+        switch = False
     else:
-        switch = 1
-
+        switch = True
 def draw():
     global r
     global g
     global b
     global switch
     global background
-    if switch == 1:
-        continue
+    '''if switch == True:
+        loop()
     else:
-        pass
+        noLoop() '''
     r = random.randrange(255)
     g = random.randrange(255)
     b = random.randrange(255)
     background(r,g,b)
     
-    time.sleep(0.5)
+    delay(500)
     
     fill(255)
     textSize(200)
