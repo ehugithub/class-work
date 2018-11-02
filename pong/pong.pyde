@@ -7,9 +7,6 @@ def setup():
 location = PVector(683, 350)
 velocity = PVector(10, 10)
 
-class Paddle:
-    pass
-
 left = 0
 right = 0
 left_pos = right_pos = 300.00
