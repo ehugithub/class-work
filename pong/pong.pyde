@@ -53,7 +53,6 @@ def draw():
 def keyPressed():
     global left_pos
     global right_pos
-    smooth()
     if key == 'a':
         left_pos -= 10
     elif key == 'd':
@@ -62,3 +61,6 @@ def keyPressed():
         right_pos -= 10
     elif keyCode == RIGHT:
         right_pos += 10
+        
+def keyReleased():
+    pass
