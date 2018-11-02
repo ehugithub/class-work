@@ -27,6 +27,8 @@ def score_point():
 
 def draw():
     global velocity
+    global left_pos
+    global right_pos
     background(255)
     
     fill(255)
@@ -40,9 +42,16 @@ def draw():
     
     if location.y > height - 20 or location.y < 20:
         velocity.y *= -1
-        
+
+    left_pos = constrain(left_pos, 0, 500)
+    right_pos = constrain(right_pos, 0, 500)
+    
     rect(10, left_pos, 15, 200)
     rect(1341, right_pos, 15, 200)
+    
+    if location.x > 1331 and location.y > right_pos and location.y < right_pos + 200 or location.x < 40 and location.y > left_pos and location.y < left_pos + 200:
+        velocity.x *= -1
+    
     
 def keyPressed():
     global left_pos
