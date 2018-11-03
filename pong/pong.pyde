@@ -24,7 +24,7 @@ def draw():
     global right_pos
     global left
     global right
-    frameRate(10)
+    frameRate(100)
     background(255)
     fill(255)
     fill(0)
@@ -58,7 +58,6 @@ def draw():
             velocity.y += 0.25
         elif velocity.y < 0:
             velocity.y -= 0.25
-        print(velocity.x, velocity.y)
         velocity.x *= -1
         if location.x > 1331:
             location.x = 1331
