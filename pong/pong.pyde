@@ -4,33 +4,29 @@ def setup():
   smooth()
   background(255)
 
-location = PVector(683, 350)
-velocity = PVector(10, 10)
+location = PVector(683.0, 350.0)
+velocity = PVector(10.0, 10.0)
 
-left = 0
-right = 0
+keypress = [False] * 4
+
+left = right = speed = 0
 left_pos = right_pos = 300.00
 
 def score_point():
-    global right
-    global left
     global location
-    if location.x > width + 200:
-        right += 1
-        location = PVector(width / 2, height / 2)
-    elif location.x < -200:
-        left += 1
-        location = PVector(width / 2, height / 2)
+    location = PVector(width / 2, height / 2)
+    velocity.x = 10.0
+    velocity.y = 10.0
 
 def draw():
-    global velocity
     global left_pos
     global right_pos
+    global left
+    global right
+    frameRate(100)
     background(255)
-    
     fill(255)
     fill(0)
-    score_point()
     textSize(150)
     text('{}     {}'.format(left, right), 450, 200)
     
@@ -43,24 +39,49 @@ def draw():
     left_pos = constrain(left_pos, 0, 500)
     right_pos = constrain(right_pos, 0, 500)
     
+    if location.x > width + 50:
+        left += 1
+        score_point()
+    elif location.x < -50:
+        right += 1
+        score_point()
     rect(10, left_pos, 15, 200)
     rect(1341, right_pos, 15, 200)
     
-    if location.x > 1331 and location.y > right_pos and location.y < right_pos + 200 or location.x < 40 and location.y > left_pos and location.y < left_pos + 200:
+    if location.x > 1331 and location.y + 25 > right_pos and location.y < right_pos + 175 or location.x < 40 and location.y + 25 > left_pos and location.y < left_pos + 175:
+        velocity.x += 1
+        velocity.y += 1
         velocity.x *= -1
+        if location.x > 1331:
+            location.x = 1331
+        else:
+            location.x = 40
     
-    
-def keyPressed():
-    global left_pos
-    global right_pos
-    if key == 'a':
+    if keypress[0] == True:
         left_pos -= 10
-    elif key == 'd':
+    elif keypress[1] == True:
         left_pos += 10
-    elif keyCode == LEFT:
+    elif keypress[2] == True:
         right_pos -= 10
+    elif keypress[3] == True:
+        right_pos += 7
+
+def keyPressed():
+    if key == 'a':
+        keypress[0] = True
+    elif key == 'd':
+        keypress[1] = True
+    elif keyCode == LEFT:
+        keypress[2] = True
     elif keyCode == RIGHT:
-        right_pos += 10
+        keypress[3] = True
         
 def keyReleased():
-    pass
+    if key == 'a':
+        keypress[0] = False
+    elif key == 'd':
+        keypress[1] = False
+    elif keyCode == LEFT:
+        keypress[2] = False
+    elif keyCode == RIGHT:
+        keypress[3] = False
