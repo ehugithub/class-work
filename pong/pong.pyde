@@ -17,13 +17,14 @@ def score_point():
     location = PVector(width / 2, height / 2)
     velocity.x = 10.0
     velocity.y = 10.0
+    delay(300)
 
 def draw():
     global left_pos
     global right_pos
     global left
     global right
-    frameRate(100)
+    frameRate(10)
     background(255)
     fill(255)
     fill(0)
@@ -49,8 +50,15 @@ def draw():
     rect(1341, right_pos, 15, 200)
     
     if location.x > 1331 and location.y + 25 > right_pos and location.y < right_pos + 175 or location.x < 40 and location.y + 25 > left_pos and location.y < left_pos + 175:
-        velocity.x += 1
-        velocity.y += 1
+        if velocity.x > 0:
+            velocity.x += 0.25
+        elif velocity.x < 0:
+            velocity.x -= 0.25
+        if velocity.y > 0:
+            velocity.y += 0.25
+        elif velocity.y < 0:
+            velocity.y -= 0.25
+        print(velocity.x, velocity.y)
         velocity.x *= -1
         if location.x > 1331:
             location.x = 1331
