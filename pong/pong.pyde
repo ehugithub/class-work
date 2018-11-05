@@ -8,7 +8,6 @@ location = PVector(683.0, 350.0)
 velocity = PVector(10.0, 10.0)
 
 keypress = [False] * 4
-
 left = right = speed = 0
 left_pos = right_pos = 300.00
 
@@ -46,7 +45,11 @@ def draw():
     elif location.x < -50:
         right += 1
         score_point()
+    
+    noStroke()
+    fill(255,0,0)
     rect(10, left_pos, 15, 200)
+    fill(0,0,255)
     rect(1341, right_pos, 15, 200)
     
     if location.x > 1331 and location.y + 25 > right_pos and location.y < right_pos + 175 or location.x < 40 and location.y + 25 > left_pos and location.y < left_pos + 175:
@@ -64,6 +67,12 @@ def draw():
         else:
             location.x = 40
     
+    ''' if single_player = True:
+        if location.y > left_pos + 150:
+            left_pos += difficulty * 10
+        elif location.y < left_pos + 150:
+            left_pos -= difficulty * 10 '''
+    
     if keypress[0] == True:
         left_pos -= 10
     elif keypress[1] == True:
@@ -73,7 +82,7 @@ def draw():
     elif keypress[3] == True:
         right_pos += 7
 
-def keyPressed():
+def keyPressed(): #how do you use a dict idk
     if key == 'a':
         keypress[0] = True
     elif key == 'd':
