@@ -11,12 +11,22 @@ keypress = [False] * 4
 left = right = speed = 0
 left_pos = right_pos = 300.00
 
+def start_game():
+    velocity.set([0,0])
+    fill(255)
+    rect(200, 200, width/2, height/2)
+    print(width,height)
 def score_point():
     global location
     location = PVector(width / 2, height / 2)
     velocity.x = 10.0
     velocity.y = 10.0
     delay(300)
+
+
+
+#fill(0)
+#rect(200, 200, 650, 350)
 
 def draw():
     global left_pos
@@ -29,7 +39,6 @@ def draw():
     fill(0)
     textSize(150)
     text('{}     {}'.format(left, right), 450, 200)
-    
     ellipse(location.x, location.y, 40, 40)
     location.add(velocity)
     
@@ -45,14 +54,14 @@ def draw():
     elif location.x < -50:
         right += 1
         score_point()
-    
+        
     noStroke()
     fill(255,0,0)
     rect(10, left_pos, 15, 200)
     fill(0,0,255)
     rect(1341, right_pos, 15, 200)
     
-    if location.x > 1331 and location.y + 25 > right_pos and location.y < right_pos + 175 or location.x < 40 and location.y + 25 > left_pos and location.y < left_pos + 175:
+    if location.x > 1331 and location.y > right_pos and location.y < right_pos + 200 or location.x < 40 and location.y > left_pos and location.y < left_pos + 200:
         if velocity.x > 0:
             velocity.x += 0.25
         elif velocity.x < 0:
@@ -73,13 +82,13 @@ def draw():
         elif location.y < left_pos + 150:
             left_pos -= difficulty * 10 '''
     
-    if keypress[0] == True:
+    if keypress[0]:
         left_pos -= 10
-    elif keypress[1] == True:
+    elif keypress[1]:
         left_pos += 10
-    elif keypress[2] == True:
+    elif keypress[2]:
         right_pos -= 10
-    elif keypress[3] == True:
+    elif keypress[3]:
         right_pos += 7
 
 def keyPressed(): #how do you use a dict idk
