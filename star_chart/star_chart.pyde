@@ -15,11 +15,9 @@ def draw():
     # draw stars
     noStroke()
     fill(255)
-    index = 0
-
-    while index < len(stars):
-        ellipse(stars[index][0], stars[index][1], 5, 5)
-        index += 1
+    
+    for index in stars:
+        ellipse(index[0], index[1], 5, 5)
 
     for n, i in enumerate(stars):
         stars[n][0] += 0.1
