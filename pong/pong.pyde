@@ -1,4 +1,3 @@
-import random
 def setup():
   size(1366, 700)
   smooth()
@@ -11,22 +10,19 @@ keypress = [False] * 4
 left = right = speed = 0
 left_pos = right_pos = 300.00
 
-def start_game():
+'''def start_game():
     velocity.set([0,0])
-    fill(255)
-    rect(200, 200, width/2, height/2)
-    print(width,height)
+    fill(128)
+    rect(300, 350, 300, 100)
+    rect(800, 350, 300, 100)'''
+    
+
 def score_point():
     global location
     location = PVector(width / 2, height / 2)
     velocity.x = 10.0
     velocity.y = 10.0
     delay(300)
-
-
-
-#fill(0)
-#rect(200, 200, 650, 350)
 
 def draw():
     global left_pos
@@ -35,12 +31,13 @@ def draw():
     global right
     frameRate(100)
     background(255)
-    fill(255)
     fill(0)
     textSize(150)
     text('{}     {}'.format(left, right), 450, 200)
     ellipse(location.x, location.y, 40, 40)
     location.add(velocity)
+    
+    #start_game()
     
     if location.y > height - 20 or location.y < 20:
         velocity.y *= -1
@@ -84,12 +81,12 @@ def draw():
     
     if keypress[0]:
         left_pos -= 10
-    elif keypress[1]:
+    if keypress[1]:
         left_pos += 10
-    elif keypress[2]:
+    if keypress[2]:
         right_pos -= 10
-    elif keypress[3]:
-        right_pos += 7
+    if keypress[3]:
+        right_pos += 10
 
 def keyPressed(): #how do you use a dict idk
     if key == 'a':
@@ -100,6 +97,7 @@ def keyPressed(): #how do you use a dict idk
         keypress[2] = True
     elif keyCode == RIGHT:
         keypress[3] = True
+    
         
 def keyReleased():
     if key == 'a':
