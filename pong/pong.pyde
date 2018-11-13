@@ -88,7 +88,7 @@ def draw():
     if keypress[3]:
         right_pos += 10
 
-def keyPressed(): #how do you use a dict idk
+def keyPressed():
     if key == 'a':
         keypress[0] = True
     elif key == 'd':
