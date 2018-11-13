@@ -85,11 +85,7 @@ def draw():
         left_pos += 10
     if keypress[2]:
         right_pos -= 10
-<<<<<<< HEAD
-    elif keypress[3]:
-=======
     if keypress[3]:
->>>>>>> 308e54ca3adb8d7e3a5fc3e567a9f3fc3da2a487
         right_pos += 10
 
 def keyPressed():
