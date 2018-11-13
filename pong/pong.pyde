@@ -10,13 +10,23 @@ keypress = [False] * 4
 left = right = speed = 0
 left_pos = right_pos = 300.00
 
-'''def start_game():
+def start_game():
     velocity.set([0,0])
     fill(128)
     rect(300, 350, 300, 100)
-    rect(800, 350, 300, 100)'''
+    rect(800, 350, 300, 100)
     
-
+    textSize(48)
+    fill(0)
+    text('Single Player', 300, 430)
+    text('Multiplayer', 800, 430)
+    
+    if mousePressed == True and mouseY > 350 and mouseY < 450 and mouseX > 300 and mouseX < 600:
+        single_player = True
+    elif mousePressed == True and mouseY > 350 and mouseY < 450 and mouseX > 800 and mouseX < 1100:
+        pass
+    
+    new_game == False
 def score_point():
     global location
     location = PVector(width / 2, height / 2)
@@ -24,6 +34,7 @@ def score_point():
     velocity.y = 10.0
     delay(300)
 
+new_game = True
 def draw():
     global left_pos
     global right_pos
@@ -37,7 +48,8 @@ def draw():
     ellipse(location.x, location.y, 40, 40)
     location.add(velocity)
     
-    #start_game()
+    if new_game == True:
+        start_game()
     
     if location.y > height - 20 or location.y < 20:
         velocity.y *= -1
@@ -73,7 +85,7 @@ def draw():
         else:
             location.x = 40
     
-    ''' if single_player = True:
+    ''' if single_player == True:
         if location.y > left_pos + 150:
             left_pos += difficulty * 10
         elif location.y < left_pos + 150:
