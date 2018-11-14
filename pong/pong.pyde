@@ -11,34 +11,61 @@ left = right = speed = 0
 left_pos = right_pos = 300.00
 
 new_game = True
-
+single_player = None
+difficulty = 0
 def start_game():
+    global new_game
+    global single_player
     velocity.set([0,0])
-    fill(128)
-    rect(300, 350, 300, 100)
-    rect(800, 350, 300, 100)
-    textSize(48)
-    fill(0)
-    text('Single Player', 300, 430)
-    text('Multiplayer', 800, 430)
     
-    if mousePressed == True and mouseY > 350 and mouseY < 450 and mouseX > 300 and mouseX < 600:
+    if single_player != True:
+        fill(128)
+        rect(300, 340, 300, 100)
+        rect(800, 340, 300, 100)
+        textSize(40)
+        fill(0)
+        text('Single Player', 320, 410)
+        text('Multiplayer', 830, 410)
+    
+    if mousePressed == True and mouseY > 340 and mouseY < 440 and mouseX > 300 and mouseX < 600:
         single_player = True
         background(255)
-    elif mousePressed == True and mouseY > 350 and mouseY < 450 and mouseX > 800 and mouseX < 1100:
+    elif mousePressed == True and mouseY > 340 and mouseY < 440 and mouseX > 800 and mouseX < 1100:
         background(255)
     
+    if single_player == True:
+        fill(0)
+        textSize(100)
+        text('Select Difficulty', 350, 300)
+        fill(128)
+        rect(40, 340, 300, 100)
+        rect(540, 340, 300, 100)
+        rect(1040, 340, 300, 100)
+        textSize(40)
+        fill(0)
+        text('Easy', 140, 400)
+        text('Medium', 600, 400)
+        text('Hard', 1140, 400)
+    if mousePressed == True and mouseY > 340 and mouseY < 440 and mouseX > 40 and mouseX < 340:
+        difficulty = 1
+        background(255)
+        new_game = False
+    elif mousePressed == True and mouseY > 340 and mouseY < 440 and mouseX > 540 and mouseX < 840:
+        difficulty = 2
+        background(255)
+        new_game = False
+    elif mousePressed == True and mouseY > 340 and mouseY < 440 and mouseX > 1040 and mouseX < 1340:
+        difficulty = 3
+        background(255)
+        new_game = False
+        #velocity.set([10.0, 10.0])
     
-    new_game = False
-    print(new_game)
+
 def score_point():
     global location
     location = PVector(width / 2, height / 2)
     velocity.x = 10.0
     velocity.y = 10.0
-    #left_pos = 300
-    #right_pos = 300
-
     delay(300)
 
 def draw():
@@ -46,6 +73,7 @@ def draw():
     global right_pos
     global left
     global right
+    global difficulty
     frameRate(100)
     background(255)
     fill(0)
@@ -53,6 +81,7 @@ def draw():
     text('{}     {}'.format(left, right), 450, 200)
     ellipse(location.x, location.y, 40, 40)
     location.add(velocity)
+
 
     if new_game == True:
         start_game()
@@ -66,9 +95,11 @@ def draw():
     if location.x > width + 50:
         left += 1
         score_point()
+        left_pos = right_pos = 300
     elif location.x < -50:
         right += 1
         score_point()
+        left_pos = right_pos = 300
         
     noStroke()
     fill(255,0,0)
@@ -91,11 +122,11 @@ def draw():
         else:
             location.x = 40
     
-    ''' if single_player == True:
+    if single_player == True:
         if location.y > left_pos + 150:
             left_pos += difficulty * 10
         elif location.y < left_pos + 150:
-            left_pos -= difficulty * 10 '''
+            left_pos -= difficulty * 10
     
     if keypress[0]:
         left_pos -= 10
