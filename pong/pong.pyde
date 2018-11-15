@@ -1,14 +1,13 @@
 def setup():
   size(1366, 700)
-  smooth()
   background(255)
 
 location = PVector(683.0, 350.0)
-velocity = PVector(10.0, 10.0)
+velocity = PVector(0.0, 0.0)
 
 keypress = [False] * 4
-left = right = speed = 0
-left_pos = right_pos = 300.00
+left = right = 0
+left_pos = right_pos = 300.0
 new_game = True
 single_player = None
 difficulty = 0
@@ -20,7 +19,6 @@ def start_game():
     global left
     global right
     left = right = 0
-    velocity.set([0,0])
     background(255)
     if single_player != True:
         fill(128)
@@ -34,6 +32,7 @@ def start_game():
     if mousePressed == True and mouseY > 340 and mouseY < 440 and mouseX > 300 and mouseX < 600:
         single_player = True
         background(255)
+        delay(10)
     elif mousePressed == True and mouseY > 340 and mouseY < 440 and mouseX > 800 and mouseX < 1100:
         new_game = False
         velocity.set([10.0,10.0])
@@ -84,17 +83,20 @@ def draw():
     global left
     global right
     global difficulty
+    global single_player
     global new_game
     frameRate(100)
     background(255)
     
     if new_game == True:
         start_game()
+
     if left == 11:
         fill(255,0,0)
         textSize(80)
         text('Red wins! Click to play again', 150, 330)
         velocity.set([0.0, 0.0])
+        single_player = False
         if mousePressed == True:
             new_game = True
     elif right == 11:
@@ -102,6 +104,7 @@ def draw():
         textSize(80)
         text('Blue wins! Click to play again', 150, 330)
         velocity.set([0.0, 0.0])
+        single_player = False
         if mousePressed == True:
             new_game = True
     fill(0)
@@ -160,6 +163,7 @@ def draw():
             left_pos += difficulty * 5
         elif location.y < left_pos + 150:
             left_pos -= difficulty * 5
+
 def keyPressed():
     if key == 'a':
         keypress[0] = True
