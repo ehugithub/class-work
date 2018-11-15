@@ -91,7 +91,7 @@ def draw():
     if new_game == True:
         start_game()
 
-    if left == 11:
+    if left == 10:
         fill(255,0,0)
         textSize(80)
         text('Red wins! Click to play again', 150, 330)
@@ -99,7 +99,7 @@ def draw():
         single_player = False
         if mousePressed == True:
             new_game = True
-    elif right == 11:
+    elif right == 10:
         fill(0,0,255)
         textSize(80)
         text('Blue wins! Click to play again', 150, 330)
