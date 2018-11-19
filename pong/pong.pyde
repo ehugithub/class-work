@@ -102,6 +102,10 @@ def draw():
     
     if new_game == True:
         start_game()
+<<<<<<< HEAD
+=======
+
+>>>>>>> e54d7d1ace647ade8d75bc71f216e31d8e1f4dec
     if left == 10:
         fill(255,0,0)
         textSize(80)
