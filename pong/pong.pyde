@@ -102,10 +102,7 @@ def draw():
     
     if new_game == True:
         start_game()
-<<<<<<< HEAD
-=======
 
->>>>>>> e54d7d1ace647ade8d75bc71f216e31d8e1f4dec
     if left == 10:
         fill(255,0,0)
         textSize(80)
@@ -195,6 +192,7 @@ def draw():
 def mouseReleased():
     global button
     button = True
+
 def keyPressed():
     if key == 'a':
         keypress[0] = True
