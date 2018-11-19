@@ -1,3 +1,4 @@
+import random
 def setup():
   size(1366, 700)
   background(255)
@@ -11,32 +12,42 @@ left_pos = right_pos = 300.0
 new_game = True
 single_player = None
 difficulty = 0
-
+bots_only = False
+button = True
 def start_game():
     global new_game
     global single_player
     global difficulty
     global left
     global right
+    global bots_only
+    global button
     left = right = 0
     background(255)
     if single_player != True:
         fill(128)
-        rect(300, 340, 300, 100)
-        rect(800, 340, 300, 100)
+        rect(40, 370, 300, 100)
+        rect(540, 370, 300, 100)
+        rect(1040, 370, 300, 100)
         textSize(40)
         fill(0)
-        text('Single Player', 320, 410)
-        text('Multiplayer', 830, 410)
-    
-    if mousePressed == True and mouseY > 340 and mouseY < 440 and mouseX > 300 and mouseX < 600:
+        text('Single Player', 80, 440)
+        text('Multiplayer', 600, 440)
+        text('No Players', 1100, 440)
+        textSize(100)
+        text('Select Mode', 350, 300)
+    if mousePressed == True and button == True and mouseY > 370 and mouseY < 470 and mouseX > 40 and mouseX < 340:
         single_player = True
+        button = False
         background(255)
         delay(10)
-    elif mousePressed == True and mouseY > 340 and mouseY < 440 and mouseX > 800 and mouseX < 1100:
-        new_game = False
+    elif mousePressed == True and button == True and mouseY > 370 and mouseY < 470 and mouseX > 540 and mouseX < 840:
+        new_game = button = False
         velocity.set([10.0,10.0])
-    
+    elif mousePressed == True and button == True and mouseY > 370 and mouseY < 470 and mouseX > 1040 and mouseX < 1340:
+        bots_only = True
+        new_game = button = False
+        velocity.set([10.0, 10.0])
     if single_player == True:
         fill(0)
         textSize(100)
@@ -53,21 +64,21 @@ def start_game():
         text('Hard', 1140, 420)
         text('Impossible', 580, 630)
     
-    if mousePressed == True and mouseY > 370 and mouseY < 470 and mouseX > 40 and mouseX < 340:
+    if mousePressed == True and button == True and mouseY > 370 and mouseY < 470 and mouseX > 40 and mouseX < 340:
         difficulty = 1
-        new_game = False
+        new_game = button = False
         velocity.set([10.0, 10.0])
-    elif mousePressed == True and mouseY > 370 and mouseY < 470 and mouseX > 540 and mouseX < 840:
+    elif mousePressed == True and button == True and mouseY > 370 and mouseY < 470 and mouseX > 540 and mouseX < 840:
         difficulty = 2
-        new_game = False
+        new_game = button = False
         velocity.set([10.0, 10.0])
-    elif mousePressed == True and mouseY > 370 and mouseY < 470 and mouseX > 1040 and mouseX < 1340:
+    elif mousePressed == True and button == True and mouseY > 370 and mouseY < 470 and mouseX > 1040 and mouseX < 1340:
         difficulty = 3
-        new_game = False
+        new_game = button = False
         velocity.set([10.0, 10.0])
-    elif mousePressed == True and mouseY > 570 and mouseY < 670 and mouseX > 540 and mouseX < 840:
+    elif mousePressed == True and button == True and mouseY > 570 and mouseY < 670 and mouseX > 540 and mouseX < 840:
         difficulty = 10
-        new_game = False
+        new_game = button = False
         velocity.set([10.0, 10.0])
         
 def score_point():
@@ -85,27 +96,28 @@ def draw():
     global difficulty
     global single_player
     global new_game
+    global button
     frameRate(100)
     background(255)
     
     if new_game == True:
         start_game()
-
-    if left == 11:
+    if left == 10:
         fill(255,0,0)
         textSize(80)
         text('Red wins! Click to play again', 150, 330)
         velocity.set([0.0, 0.0])
         single_player = False
-        if mousePressed == True:
+        if mousePressed == True and button == True:
+            button = False
             new_game = True
-    elif right == 11:
+    elif right == 10:
         fill(0,0,255)
         textSize(80)
         text('Blue wins! Click to play again', 150, 330)
         velocity.set([0.0, 0.0])
         single_player = False
-        if mousePressed == True:
+        if mousePressed == True and button == True:
             new_game = True
     fill(0)
     textSize(150)
@@ -163,7 +175,22 @@ def draw():
             left_pos += difficulty * 5
         elif location.y < left_pos + 150:
             left_pos -= difficulty * 5
+    
+    if bots_only == True:
+        if location.x < 683:
+            if location.y > left_pos + 150:
+                left_pos += random.randint(5, 20)
+            elif location.y < left_pos + 150:
+                left_pos -= random.randint(5, 20)
+        elif location.x > 683:
+            if location.y > right_pos + 150:
+                right_pos += random.randint(5, 20)
+            elif location.y < right_pos + 150:
+                right_pos -= random.randint(5, 20)
 
+def mouseReleased():
+    global button
+    button = True
 def keyPressed():
     if key == 'a':
         keypress[0] = True
