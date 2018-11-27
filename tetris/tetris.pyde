@@ -14,6 +14,7 @@ def create_shape():
    return rect(position.x,position.y, 70, 70)
 def draw():
    global position
+   delay(800)
    background(0)
    line(1016, 0, 1016, height)
    stroke(128)
@@ -23,19 +24,9 @@ def draw():
        line(1016, i, width, i)
    create_shape()
    position.y += 35
-   delay(800)
-   if left:
-       position.x  -= 35
-   if right:
-       position.x += 35
-   print(left, right)
+   # print(left, right)
 def keyPressed():
    if keyCode == LEFT:
-       left = True
+       position.x -= 35
    elif keyCode == RIGHT:
-       right = True
-def keyReleased():
-   if keyCode == LEFT:
-       left = False
-   elif keyCode == RIGHT:
-       right = False
+       position.x += 35

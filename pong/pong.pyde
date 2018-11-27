@@ -10,7 +10,7 @@ keypress = [False] * 4
 left = right = 0
 left_pos = right_pos = 300.0
 new_game = True
-single_player = None
+single_player = False
 difficulty = 0
 bots_only = False
 button = True
@@ -36,18 +36,19 @@ def start_game():
         text('No Players', 1100, 440)
         textSize(100)
         text('Select Mode', 350, 300)
-    if mousePressed == True and button == True and mouseY > 370 and mouseY < 470 and mouseX > 40 and mouseX < 340:
-        single_player = True
-        button = False
-        background(255)
-        delay(10)
-    elif mousePressed == True and button == True and mouseY > 370 and mouseY < 470 and mouseX > 540 and mouseX < 840:
-        new_game = button = False
-        velocity.set([10.0,10.0])
-    elif mousePressed == True and button == True and mouseY > 370 and mouseY < 470 and mouseX > 1040 and mouseX < 1340:
-        bots_only = True
-        new_game = button = False
-        velocity.set([10.0, 10.0])
+    if single_player == False:
+        if mousePressed == True and button == True and mouseY > 370 and mouseY < 470 and mouseX > 40 and mouseX < 340:
+            single_player = True
+            button = False
+            background(255)
+            delay(10)
+        elif mousePressed == True and button == True and mouseY > 370 and mouseY < 470 and mouseX > 540 and mouseX < 840:
+            new_game = button = False
+            velocity.set([10.0,10.0])
+        elif mousePressed == True and button == True and mouseY > 370 and mouseY < 470 and mouseX > 1040 and mouseX < 1340:
+            bots_only = True
+            new_game = button = False
+            velocity.set([10.0, 10.0])
     if single_player == True:
         fill(0)
         textSize(100)
