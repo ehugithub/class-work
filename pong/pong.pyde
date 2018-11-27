@@ -36,7 +36,6 @@ def start_game():
         text('No Players', 1100, 440)
         textSize(100)
         text('Select Mode', 350, 300)
-    if single_player == False:
         if mousePressed == True and button == True and mouseY > 370 and mouseY < 470 and mouseX > 40 and mouseX < 340:
             single_player = True
             button = False
