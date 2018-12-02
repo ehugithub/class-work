@@ -128,7 +128,53 @@ void draw(){
   for (int i = 0; i <= height; i += 35)
     line(316, i,  width, i);
   
-  position.x = constrain(position.x, 316, width - 70);
+  switch(shape) {
+    case 1:
+      switch(angle % 360) {
+        case 0:
+          position.x = constrain(position.x, 316, width - 35); break;
+        case 90:
+          position.x = constrain(position.x, 386,  width - 70); break;
+        case 180:
+          position.x = constrain(position.x, 281, width - 70); break;
+        case 270:
+          position.x = constrain(position.x, 316, width - 140); break;
+        default: break;
+      }
+      break;
+    case 2:
+      position.x = constrain(position.x, 316, width - 70); break;
+    case 3:
+      switch(angle % 360) {
+        case 0: position.x = constrain(position.x, 351, width - 70); break;
+        case 90: position.x = constrain(position.x, 316, width - 70); break;
+        case 180: position.x = constrain(position.x, 316, width - 105); break;
+        case 270: position.x = constrain(position.x, 316, width - 70); break;
+      }
+      break;
+    case 4: case 5:
+      switch(angle % 360) {
+      case 0: position.x = constrain(position.x, 316, width - 105); break;
+      case 90: position.x = constrain(position.x, 316, width - 70); break;
+      case 180: position.x = constrain(position.x, 351, width - 70); break;
+      case 270: position.x = constrain(position.x, 316, width - 70); break;
+      }
+      break;
+    case 6:
+    switch(angle % 360) {
+      case 0: position.x = constrain(position.x, 351, width - 70); break;
+      case 90: case 270: position.x = constrain(position.x, 316, width - 70); break;
+      case 180: position.x = constrain(position.x, 316, width - 105); break;
+    }
+    break;
+    case 7:
+      switch(angle % 360) {
+      case 0: position.x = constrain(position.x, 316, width - 105); break;
+      case 90: case 270: position.x = constrain(position.x, 316, width - 70); break;
+      case 180: position.x = constrain(position.x, 351, width - 70); break;
+      }
+      break;
+  }
   pushMatrix();
   translate(position.x + 35, position.y + 35);
   rotate(radians(angle));
@@ -153,7 +199,7 @@ void keyPressed(){
   else if (keyCode == UP)
     angle += 90;
   else if (keyCode == DOWN)
-    angle -= 90;
+    angle += 270;
   else if (key == ' ')
     position.y += 35;
 }
