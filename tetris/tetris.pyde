@@ -110,6 +110,7 @@ def draw():
     global position
     global angle
     global num
+    global shape
     strokeWeight(1)
     background(0)
     line(316, 0, 316, height)
@@ -119,7 +120,51 @@ def draw():
         line(i, 0 , i, height)
     for i in range(0, height, 35):
         line(316, i, width, i)
-        
+
+    if num == 1:
+        if angle % 360 == 0:
+            position.x = constrain(position.x, 316, width - 35)
+        elif angle % 360 == 90:
+            position.x = constrain(position.x, 386,  width - 70)
+        elif angle % 360 == 180:
+            position.x = constrain(position.x, 281, width - 70)
+        elif angle & 360 == 270:
+            position.x = constrain(position.x, 316, width - 140)
+    elif num == 2:
+        position.x = constrain(position.x, 316, width - 70)
+    elif num == 3:
+        if angle % 360 == 0:
+            position.x = constrain(position.x, 351, width - 70)
+        elif angle % 360 == 90:
+            position.x = constrain(position.x, 316, width - 70)
+        elif angle % 360 == 180:
+            position.x = constrain(position.x, 316, width - 105)
+        elif angle % 360 == 270:
+            position.x = constrain(position.x, 316, width - 70)
+    elif num == 4 or num == 5:
+      if angle % 360 == 0:
+          position.x = constrain(position.x, 316, width - 105)
+      elif angle % 360 == 90:
+          position.x = constrain(position.x, 316, width - 70)
+      elif angle % 360 == 180:
+          position.x = constrain(position.x, 351, width - 70)
+      elif angle % 360 == 270:
+          position.x = constrain(position.x, 316, width - 70)
+    elif num == 6:
+      if angle % 360 == 0:
+          position.x = constrain(position.x, 351, width - 70)
+      elif angle % 360 == 90 or angle % 360 == 270:
+          position.x = constrain(position.x, 316, width - 70)
+      elif angle % 360 == 180:
+          position.x = constrain(position.x, 316, width - 105)
+    elif num == 7:
+      if angle % 360 == 0:
+          position.x = constrain(position.x, 316, width - 105)
+      elif angle % 360 == 90 or angle % 360 == 270:
+          position.x = constrain(position.x, 316, width - 70)
+      elif angle % 360 == 180:
+          position.x = constrain(position.x, 351, width - 70)
+    
     pushMatrix()
     translate(position.x + 35, position.y + 35)
     rotate(radians(angle))
