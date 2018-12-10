@@ -178,11 +178,15 @@ def draw():
     translate(position.x + 35, position.y + 35)
     rotate(radians(angle))
     tetro.create_shape(num, -35, -35)
-    tetro.create_shape(num, -35, 600)
     popMatrix()
+    
+
     position.y += 1
     
+    tetro.create_shape(num, position.x, 635)
+    
     if position.y >= height - 70:
+        angle = 0
         position.set([421, 35])
         randnum()
 def keyPressed():
