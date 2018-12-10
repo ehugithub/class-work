@@ -180,10 +180,16 @@ def draw():
     tetro.create_shape(num, -35, -35)
     popMatrix()
     
-
-    position.y += 1
+    pushMatrix()
+    translate(position.x + 35, position.y + 635)
+    rotate(radians(angle))
+    tetro.create_shape(num, -35, -35)
+    popMatrix()
     
-    tetro.create_shape(num, position.x, 635)
+    #change later
+    position.y = constrain(position.y, 0, 635)
+    
+    position.y += 1
     
     if position.y >= height - 70:
         angle = 0
