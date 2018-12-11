@@ -1,5 +1,4 @@
 import random
-import copy
 def setup():
     size(666,700)
 angle = 0
@@ -112,8 +111,8 @@ class block:
             line(x + 35, y + 35, x+ 70, y + 35)
             line(x + 70, y + 35, x+ 70, y + 70)
             line(self.posx+ 70, self.posy+ 35, self.posx+ 70, self.posy+ 70)
-    def stay(self):
-        if self.shapenum == 1:
+    def stay(self, shapenum):
+        if shapenum == 1:
             if angle % 360 == 0:
                 position.x= constrain(position.x, 316, width - 35)
             elif angle % 360 == 90:
@@ -122,9 +121,9 @@ class block:
                 position.x= constrain(position.x, 281, width - 70)
             elif angle & 360 == 270:
                 position.x= constrain(position.x, 316, width - 140)
-        elif self.shapenum == 2:
+        elif shapenum == 2:
             position.x= constrain(position.x, 316, width - 70)
-        elif self.shapenum == 3:
+        elif shapenum == 3:
             if angle % 360 == 0:
                 position.x= constrain(position.x, 351, width - 70)
             elif angle % 360 == 90:
@@ -133,7 +132,7 @@ class block:
                 position.x= constrain(position.x, 316, width - 105)
             elif angle % 360 == 270:
                 position.x= constrain(position.x, 316, width - 70)
-        elif self.shapenum == 4 or self.shapenum == 5:
+        elif shapenum == 4 or shapenum == 5:
             if angle % 360 == 0:
                 position.x= constrain(position.x, 316, width - 105)
             elif angle % 360 == 90:
@@ -142,14 +141,14 @@ class block:
                 position.x= constrain(position.x, 351, width - 70)
             elif angle % 360 == 270:
                 position.x= constrain(position.x, 316, width - 70)
-        elif self.shapenum == 6:
+        elif shapenum == 6:
             if angle % 360 == 0:
                 position.x= constrain(position.x, 351, width - 70)
             elif angle % 360 == 90 or angle % 360 == 270:
                 position.x= constrain(position.x, 316, width - 70)
             elif angle % 360 == 180:
                 position.x= constrain(position.x, 316, width - 105)
-        elif self.shapenum == 7:
+        elif shapenum == 7:
             if angle % 360 == 0:
                 position.x= constrain(position.x, 316, width - 105)
             elif angle % 360 == 90 or angle % 360 == 270:
@@ -157,7 +156,11 @@ class block:
             elif angle % 360 == 180:
                 position.x= constrain(position.x, 351, width - 70)
     def highlight(self):
-        self.create_shape(num, position.x, 600)
+        pushMatrix()
+        translate(position.x + 35, 670)
+        rotate(radians(angle))
+        tetro.create_shape(num, -35, -35)
+        popMatrix()
 tetro = block(num, -35, -35)
 def draw():
     global position
@@ -172,22 +175,15 @@ def draw():
     for i in range(0, height, 35):
         line(316, i, width, i)
         
-    tetro.stay()
-
+    tetro.stay(num)
+    
     pushMatrix()
     translate(position.x + 35, position.y + 35)
     rotate(radians(angle))
     tetro.create_shape(num, -35, -35)
     popMatrix()
     
-    pushMatrix()
-    translate(position.x + 35, position.y + 635)
-    rotate(radians(angle))
-    tetro.create_shape(num, -35, -35)
-    popMatrix()
-    
-    #change later
-    position.y = constrain(position.y, 0, 635)
+    tetro.highlight()
     
     position.y += 1
     
