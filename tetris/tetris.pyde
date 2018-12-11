@@ -1,4 +1,5 @@
 import random
+import copy
 def setup():
     size(666,700)
 angle = 0
