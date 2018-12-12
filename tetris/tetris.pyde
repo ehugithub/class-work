@@ -6,17 +6,16 @@ def setup():
 shape_list = []
 newshape = False
 angle = 0
-position = PVector(421, 35)
 left = False
 right = False
 num = random.randrange(1,8)
-
+tempx = tempy = tempangle = None
 class block:
     _ids = count(0)
-    def __init__(self, shapenum, posx, posy):
+    def __init__(self, shapenum, x, y):
         self.shapenum = shapenum
-        self.x= posx
-        self.y= posy
+        self.x = x
+        self.y = y
         self.id = next(self._ids)
     def randnum(self):
         self.shapenum = random.randrange(1,8)
@@ -30,148 +29,149 @@ class block:
         if self.shapenum == 1:
             # 'I' block
             fill(0, 255, 255)
-            rect(self.x, self.y , 35, 140)
-            line(self.x, self.y + 35 , self.x + 35, self.y + 35)
-            line(self.x, self.y + 70, self.x + 35, self.y + 70)
-            line(self.x, self.y + 105, self.x + 35, self.y + 105)
+            rect(-35, -35 , 35, 140)
+            line(-35, 0 , 0, 0)
+            line(-35, 35, 0, 35)
+            line(-35, 70, 0, 70)
         elif self.shapenum == 2:
             # Square block
             fill(255, 255, 0)
-            rect(self.x ,self.y , 70, 70)
-            line(self.x + 35,self.y , self.x + 35, self.y + 70)
-            line(self.x, self.y + 35, self.x + 70, self.y + 35)
+            rect(-35 ,-35 , 70, 70)
+            line(0,-35 , 0, 35)
+            line(-35, 0, 35, 0)
         elif self.shapenum == 3:
             # 'T' block
             fill(255, 0, 255)
             beginShape()
-            vertex(self.x, self.y )
-            vertex(self.x, self.y + 35)
-            vertex(self.x - 35, self.y + 35)
-            vertex(self.x - 35, self.y + 70)
-            vertex(self.x + 70, self.y + 70)
-            vertex(self.x + 70, self.y + 35)
-            vertex(self.x + 35, self.y + 35)
-            vertex(self.x + 35, self.y )
+            vertex(-35, -35 )
+            vertex(-35, 0)
+            vertex(-35 - 35, 0)
+            vertex(-35 - 35, 35)
+            vertex(35, 35)
+            vertex(35, 0)
+            vertex(0, 0)
+            vertex(0, -35 )
             endShape(CLOSE)
-            line(self.x, self.y + 35, self.x + 35, self.y + 35)
-            line(self.x, self.y + 35, self.x, self.y + 70)
-            line(self.x + 35,self.y + 35, self.x + 35,self.y + 70)
+            line(-35, 0, 0, 0)
+            line(-35, 0, -35, 35)
+            line(0,0, 0,35)
         elif self.shapenum == 4:
             #'L' block
             fill(255, 165, 0) 
             beginShape()
-            vertex(self.x + 70, self.y )
-            vertex(self.x + 70, self.y + 35)
-            vertex(self.x, self.y + 35)
-            vertex(self.x, self.y + 70)
-            vertex(self.x + 105,self.y + 70)
-            vertex(self.x + 105,self.y )
+            vertex(35, -35)
+            vertex(35, 0)
+            vertex(-35, 0)
+            vertex(-35, 35)
+            vertex(70,35)
+            vertex(70,-35 )
             endShape(CLOSE)
-            line(self.x + 35, self.y + 35, self.x + 35, self.y + 70)
-            line(self.x + 70, self.y + 35, self.x + 70, self.y + 70)
-            line(self.x + 70, self.y + 35, self.x + 105, self.y + 35)
+            line(0, 0, 0, 35)
+            line(35, 0, 35, 35)
+            line(35, 0, 70, 0)
         elif self.shapenum == 5:
             # 'J' block
             fill(0, 0, 255)
             beginShape()
-            vertex(self.x, self.y )
-            vertex(self.x, self.y + 70)
-            vertex(self.x + 105, self.y + 70)
-            vertex(self.x + 105, self.y + 35)
-            vertex(self.x + 35, self.y + 35)
-            vertex(self.x + 35, self.y )
+            vertex(-35, -35)
+            vertex(-35, 35)
+            vertex(70, 35)
+            vertex(70, 0)
+            vertex(0, 0)
+            vertex(0, -35)
             endShape(CLOSE)
-            line(self.x, self.y + 35, self.x + 35, self.y + 35)
-            line(self.x + 35,self.y + 35, self.x + 35, self.y + 70)
-            line(self.x + 70, self.y + 35, self.x + 70, self.y + 70)
+            line(-35, 0, 0, 0)
+            line(0,0, 0, 35)
+            line(35, 0, 35, 35)
         elif self.shapenum == 6:
             # 'S' block
             fill(0, 255, 0)
             beginShape()
-            vertex(self.x, self.y )
-            vertex(self.x, self.y + 35)
-            vertex(self.x - 35, self.y + 35)
-            vertex(self.x - 35, self.y + 70)
-            vertex(self.x + 35, self.y + 70)
-            vertex(self.x + 35, self.y + 35)
-            vertex(self.x + 70, self.y + 35)
-            vertex(self.x + 70, self.y )
+            vertex(-35, -35 )
+            vertex(-35, 0)
+            vertex(-35 - 35, 0)
+            vertex(-35 - 35, 35)
+            vertex(0, 35)
+            vertex(0, 0)
+            vertex(35, 0)
+            vertex(35, -35 )
             endShape(CLOSE)
-            line(self.x, self.y + 35, self.x + 35, self.y + 35)
-            line(self.x, self.y + 35, self.x, self.y + 70)
-            line(self.x + 35, self.y , self.x + 35, self.y + 35)
+            line(-35, 0, 0, 0)
+            line(-35, 0, -35, 35)
+            line(0, -35 , 0, 0)
         elif self.shapenum == 7:
             # 'Z' block
             fill(255, 0, 0)
             beginShape()
-            vertex(self.x, self.y )
-            vertex(self.x, self.y + 35)
-            vertex(self.x + 35, self.y + 35)
-            vertex(self.x + 35, self.y + 70)
-            vertex(self.x + 105, self.y + 70)
-            vertex(self.x + 105, self.y + 35)
-            vertex(self.x + 70, self.y + 35)
-            vertex(self.x + 70, self.y )
+            vertex(-35, -35 )
+            vertex(-35, 0)
+            vertex(0, 0)
+            vertex(0, 35)
+            vertex(70, 35)
+            vertex(70, 0)
+            vertex(35, 0)
+            vertex(35, -35 )
             endShape(CLOSE)
-            line(self.x + 35, self.y, self.x + 35, self.y + 35)
-            line(self.x + 35, self.y + 35, self.x + 70, self.y + 35)
-            line(self.x + 70, self.y + 35, self.x + 70, self.y + 70)
-            line(self.x + 70, self.y+ 35, self.x + 70, self.y+ 70)
+            line(0, -35, 0, 0)
+            line(0, 0, 35, 0)
+            line(35, 0, 35, 35)
+            line(35, -35+ 35, 35, -35+ 70)
     def stay(self):
         if self.shapenum == 1:
             if angle % 360 == 0:
-                position.x= constrain(position.x, 316, width - 35)
+                self.x = constrain(self.x, 316, width - 35)
             elif angle % 360 == 90:
-                position.x= constrain(position.x, 386,  width - 70)
+                self.x = constrain(self.x, 386,  width - 70)
             elif angle % 360 == 180:
-                position.x= constrain(position.x, 281, width - 70)
+                self.x = constrain(self.x, 281, width - 70)
             elif angle & 360 == 270:
-                position.x= constrain(position.x, 316, width - 140)
+                self.x = constrain(self.x, 316, width - 140)
         elif self.shapenum == 2:
-            position.x= constrain(position.x, 316, width - 70)
+            self.x = constrain(self.x, 316, width - 70)
         elif self.shapenum == 3:
             if angle % 360 == 0:
-                position.x = constrain(position.x, 351, width - 70)
+                self.x  = constrain(self.x, 351, width - 70)
             elif angle % 360 == 90:
-                position.x= constrain(position.x, 316, width - 70)
+                self.x = constrain(self.x, 316, width - 70)
             elif angle % 360 == 180:
-                position.x= constrain(position.x, 316, width - 105)
+                self.x = constrain(self.x, 316, width - 105)
             elif angle % 360 == 270:
-                position.x= constrain(position.x, 316, width - 70)
+                self.x = constrain(self.x, 316, width - 70)
         elif self.shapenum == 4 or self.shapenum == 5:
             if angle % 360 == 0:
-                position.x= constrain(position.x, 316, width - 105)
+                self.x = constrain(self.x, 316, width - 105)
             elif angle % 360 == 90:
-                position.x= constrain(position.x, 316, width - 70)
+                self.x = constrain(self.x, 316, width - 70)
             elif angle % 360 == 180:
-                position.x= constrain(position.x, 351, width - 70)
+                self.x = constrain(self.x, 351, width - 70)
             elif angle % 360 == 270:
-                position.x= constrain(position.x, 316, width - 70)
+                self.x = constrain(self.x, 316, width - 70)
         elif self.shapenum == 6:
             if angle % 360 == 0:
-                position.x= constrain(position.x, 351, width - 70)
+                self.x = constrain(self.x, 351, width - 70)
             elif angle % 360 == 90 or angle % 360 == 270:
-                position.x= constrain(position.x, 316, width - 70)
+                self.x = constrain(self.x, 316, width - 70)
             elif angle % 360 == 180:
-                position.x= constrain(position.x, 316, width - 105)
+                self.x = constrain(self.x, 316, width - 105)
         elif self.shapenum == 7:
             if angle % 360 == 0:
-                position.x= constrain(position.x, 316, width - 105)
+                self.x = constrain(self.x, 316, width - 105)
             elif angle % 360 == 90 or angle % 360 == 270:
-                position.x= constrain(position.x, 316, width - 70)
+                self.x = constrain(self.x, 316, width - 70)
             elif angle % 360 == 180:
-                position.x= constrain(position.x, 351, width - 70)
+                self.x = constrain(self.x, 351, width - 70)
     def highlight(self):
         pushMatrix()
-        translate(position.x + 35, 670)
+        translate(self.x  + 35, 665)
         rotate(radians(angle))
         tetro.create_shape()
         popMatrix()
     def copyshape(self):
         shape_list.append(copy.deepcopy(tetro))
-tetro = block(num, -35, -35)
+tetro = block(num, 421, 35)
 def draw():
     global position, angle, num, newshape, shape_list
+    global tempx, tempy, tempangle
     strokeWeight(1)
     background(0)
     line(316, 0, 316, height)
@@ -182,35 +182,44 @@ def draw():
         line(316, i, width, i)
         
     tetro.stay()
+    
     pushMatrix()
-    translate(position.x + 35, position.y + 35)
+    translate(tetro.x + 35, tetro.y + 35)
     rotate(radians(angle))
     tetro.create_shape()
     popMatrix()
     
     tetro.highlight()
     
-    position.y += 1
-    if position.y >= height - 70:
+    tetro.y += 1
+    if tetro.y  >= height - 70:
         angle = 0
-        position.set([421, 35])
         tetro.randnum()
         tetro.copyshape()
+        tempx = copy.copy(tetro.x)
+        tempangle = copy.copy(angle)
+        tempy = copy.copy(tetro.y)
+        tetro.x = 421
+        tetro.y = 35
         newshape = True
+        
+    
     if newshape == True:
+        pushMatrix()
+        translate(tempx + 35, tempy + 35)
         for i in shape_list:
             i.create_shape()
-    if mousePressed:
-        print(getattr(shape_list[3], "shapenum"))
+        popMatrix()
+
 def keyPressed():
     global angle
     if keyCode == LEFT:
-        position.x -= 35
+        tetro.x -= 35
     elif keyCode == RIGHT:
-        position.x += 35
+        tetro.x += 35
     elif keyCode == UP:
         angle += 90
     elif keyCode == DOWN:
         angle -= 90
-    elif key== ' ':
-        position.y += 35
+    elif key == ' ':
+        tetro.y += 35
