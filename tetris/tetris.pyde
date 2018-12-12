@@ -1,7 +1,10 @@
 import random
 import copy
+from itertools import count
 def setup():
     size(666,700)
+shape_list = []
+newshape = False
 angle = 0
 position = PVector(421, 35)
 left = False
@@ -11,10 +14,12 @@ def randnum():
     global num
     num = random.randrange(1,8)
 class block:
+    _ids = count(0)
     def __init__(self, shapenum, posx, posy):
         self.shapenum = shapenum
         self.posx= posx
         self.posy= posy
+        self.id = next(self._ids)
     def create_shape(self, num, x, y):
         strokeWeight(3)
         strokeCap(PROJECT)
@@ -162,11 +167,16 @@ class block:
         rotate(radians(angle))
         tetro.create_shape(num, -35, -35)
         popMatrix()
+    def copyshape(self):
+        tetro2 = copy.deepcopy(tetro)
+        shape_list.append(tetro2)
 tetro = block(num, -35, -35)
 def draw():
     global position
     global angle
     global num
+    global newshape
+    global shape_list
     strokeWeight(1)
     background(0)
     line(316, 0, 316, height)
@@ -177,7 +187,6 @@ def draw():
         line(316, i, width, i)
         
     tetro.stay(num)
-    
     pushMatrix()
     translate(position.x + 35, position.y + 35)
     rotate(radians(angle))
@@ -192,6 +201,10 @@ def draw():
         angle = 0
         position.set([421, 35])
         randnum()
+        tetro.copyshape()
+        newshape = True
+    if newshape == True:
+        allshapes = [i.create_shape for i in shape_list]
 def keyPressed():
     global angle
     if keyCode == LEFT:
