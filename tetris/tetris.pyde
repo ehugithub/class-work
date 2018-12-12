@@ -202,7 +202,6 @@ def draw():
         tetro.x = 421
         tetro.y = 35
         newshape = True
-        
     
     if newshape == True:
         pushMatrix()
