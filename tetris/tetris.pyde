@@ -124,7 +124,7 @@ class block:
                 self.x = constrain(self.x, 386,  width - 70)
             elif angle % 360 == 180:
                 self.x = constrain(self.x, 281, width - 70)
-            elif angle & 360 == 270:
+            elif angle % 360 == 270:
                 self.x = constrain(self.x, 316, width - 140)
         elif self.shapenum == 2:
             self.x = constrain(self.x, 316, width - 70)
