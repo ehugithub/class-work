@@ -4,10 +4,9 @@ import copy
 from itertools import count
 def setup():
     size(666,700)
-    sl = SoundFile(this, "theme.mp3")
-    # sl.loop()
+    sf = SoundFile(this,"theme.mp3")
+    sf.loop()
 shape_list = []
-grid = ([False] * 10) * 16
 newshape = False
 num = random.randrange(1,8)
 tempx = tempy = tempangle = None
@@ -228,7 +227,7 @@ class block:
         self.y = -140
         newshape = True
         self.angle = 0
-tetro = block(num, 421, -140, 0)
+tetro = block(6, 421, -140, 0)
 def draw():
     global position, angle, num, newshape, shape_list, count
     strokeWeight(1)
@@ -252,17 +251,17 @@ def draw():
     popMatrix()
 
     if frameCount % 10 == 0:
-        for i in shape_list:
-            if tetro.y >= i.y - 70 and tetro.x == i.x:
-                tetro.reached_end()
         tetro.y += 35
+    
     
     if tetro.shapenum == 1:
         if tetro.angle % 360 == 0 and tetro.y >= height - 140:
             tetro.reached_end()
         elif tetro.angle % 360 == 90 and tetro.y >= height - 35:
             tetro.reached_end()
-        elif tetro.angle % 360 == 180 or tetro.angle % 360 == 270 and tetro.y >= height - 70:
+        elif tetro.angle % 360 == 180 and tetro.y >= height - 70:
+            tetro.reached_end()
+        elif tetro.angle % 360 == 270 and tetro.y >= height - 70:
             tetro.reached_end()
     elif tetro.shapenum == 2:
         if tetro.y >= height - 70:
@@ -295,6 +294,7 @@ def draw():
         elif tetro.angle % 360 != 90:
             if tetro.y >= height - 70:
                 tetro.reached_end()
+    
     
     if newshape == True:
         for i in shape_list:
