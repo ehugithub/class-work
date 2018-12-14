@@ -4,9 +4,10 @@ import copy
 from itertools import count
 def setup():
     size(666,700)
-    file = SoundFile(this, "theme.mp3")
-    file.play()
+    sl = SoundFile(this, "theme.mp3")
+    # sl.loop()
 shape_list = []
+grid = ([False] * 10) * 16
 newshape = False
 num = random.randrange(1,8)
 tempx = tempy = tempangle = None
@@ -120,71 +121,71 @@ class block:
         if self.shapenum == 1:
             if self.angle % 360 == 0:
                 self.x = constrain(self.x, 316, width - 35)
-                self.y = constrain(self.y, 0, height - 140)
+                self.y = constrain(self.y, -140, height - 140)
             elif self.angle % 360 == 90:
                 self.x = constrain(self.x, 386,  width - 70)
-                self.y = constrain(self.y, 0, height - 35)
+                self.y = constrain(self.y, -140, height - 35)
             elif self.angle % 360 == 180:
                 self.x = constrain(self.x, 281, width - 70)
-                self.y = constrain(self.y, 0, height - 70)
+                self.y = constrain(self.y, -140, height - 70)
             elif self.angle % 360 == 270:
                 self.x = constrain(self.x, 316, width - 140)
-                self.y = constrain(self.y, 0, height - 70)
+                self.y = constrain(self.y, -140, height - 70)
         elif self.shapenum == 2:
             self.x = constrain(self.x, 316, width - 70)
-            self.y = constrain(self.y, 0, height - 70)
+            self.y = constrain(self.y, -140, height - 70)
         elif self.shapenum == 3:
             if self.angle % 360 == 0:
                 self.x = constrain(self.x, 351, width - 70)
-                self.y = constrain(self.y, 0, height - 70)
+                self.y = constrain(self.y, -140, height - 70)
             elif self.angle % 360 == 90:
                 self.x = constrain(self.x, 316, width - 70)
-                self.y = constrain(self.y, 0, height - 70)
+                self.y = constrain(self.y, -140, height - 70)
             elif self.angle % 360 == 180:
                 self.x = constrain(self.x, 316, width - 105)
-                self.y = constrain(self.y, 0, height - 70)
+                self.y = constrain(self.y, -140, height - 70)
             elif self.angle % 360 == 270:
                 self.x = constrain(self.x, 316, width - 70)
-                self.y = constrain(self.y, 0, height - 105)
+                self.y = constrain(self.y, -140, height - 105)
         elif self.shapenum == 4 or self.shapenum == 5:
             if self.angle % 360 == 0:
                 self.x = constrain(self.x, 316, width - 105)
-                self.y = constrain(self.y, 0, height - 70)
+                self.y = constrain(self.y, -140, height - 70)
             elif self.angle % 360 == 90:
                 self.x = constrain(self.x, 316, width - 70)
-                self.y = constrain(self.y, 0, height - 105)
+                self.y = constrain(self.y, -140, height - 105)
             elif self.angle % 360 == 180:
                 self.x = constrain(self.x, 351, width - 70)
-                self.y = constrain(self.y, 0, height - 70)
+                self.y = constrain(self.y, -140, height - 70)
             elif self.angle % 360 == 270:
                 self.x = constrain(self.x, 316, width - 70)
-                self.y = constrain(self.y, 0, height - 70)
+                self.y = constrain(self.y, -140, height - 70)
         elif self.shapenum == 6:
             if self.angle % 360 == 0:
                 self.x = constrain(self.x, 351, width - 70)
-                self.y = constrain(self.y, 0, height - 70)
+                self.y = constrain(self.y, -140, height - 70)
             elif self.angle % 360 == 90:
                 self.x = constrain(self.x, 316, width - 70)
-                self.y = constrain(self.y, 0, height - 70)
+                self.y = constrain(self.y, -140, height - 70)
             elif self.angle % 360 == 270:
                 self.x = constrain(self.x, 316, width - 70)
-                self.y = constrain(self.y, 0, height - 105)
+                self.y = constrain(self.y, -140, height - 105)
             elif self.angle % 360 == 180:
                 self.x = constrain(self.x, 316, width - 105)
-                self.y = constrain(self.y, 0, height - 70)
+                self.y = constrain(self.y, -140, height - 70)
         elif self.shapenum == 7:
             if self.angle % 360 == 0:
                 self.x = constrain(self.x, 316, width - 105)
-                self.y = constrain(self.y, 0, height - 70)
+                self.y = constrain(self.y, -140, height - 70)
             elif self.angle % 360 == 90:
                 self.x = constrain(self.x, 316, width - 70)
-                self.y = constrain(self.y, 0, height - 105)
+                self.y = constrain(self.y, -140, height - 105)
             elif self.angle % 360 == 180:
                 self.x = constrain(self.x, 351, width - 70)
-                self.y = constrain(self.y, 0, height - 70)
+                self.y = constrain(self.y, -140, height - 70)
             elif self.angle % 360 == 270:
                 self.x = constrain(self.x, 316, width - 70)
-                self.y = constrain(self.y, 0, height - 70)
+                self.y = constrain(self.y, -140, height - 70)
     def highlight(self):
         if self.shapenum == 1:
             if self.angle % 360 == 0:
@@ -224,10 +225,10 @@ class block:
         self.copyshape()
         self.randnum()
         self.x = 421
-        self.y = 35
+        self.y = -140
         newshape = True
         self.angle = 0
-tetro = block(6, 421, 35, 0)
+tetro = block(num, 421, -140, 0)
 def draw():
     global position, angle, num, newshape, shape_list, count
     strokeWeight(1)
@@ -251,17 +252,17 @@ def draw():
     popMatrix()
 
     if frameCount % 10 == 0:
+        for i in shape_list:
+            if tetro.y >= i.y - 70 and tetro.x == i.x:
+                tetro.reached_end()
         tetro.y += 35
-    
     
     if tetro.shapenum == 1:
         if tetro.angle % 360 == 0 and tetro.y >= height - 140:
             tetro.reached_end()
         elif tetro.angle % 360 == 90 and tetro.y >= height - 35:
             tetro.reached_end()
-        elif tetro.angle % 360 == 180 and tetro.y >= height - 70:
-            tetro.reached_end()
-        elif tetro.angle % 360 == 270 and tetro.y >= height - 70:
+        elif tetro.angle % 360 == 180 or tetro.angle % 360 == 270 and tetro.y >= height - 70:
             tetro.reached_end()
     elif tetro.shapenum == 2:
         if tetro.y >= height - 70:
@@ -294,7 +295,6 @@ def draw():
         elif tetro.angle % 360 != 90:
             if tetro.y >= height - 70:
                 tetro.reached_end()
-    
     
     if newshape == True:
         for i in shape_list:
