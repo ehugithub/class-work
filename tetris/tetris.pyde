@@ -1,23 +1,20 @@
 add_library('sound')
 import random
 import copy
-from itertools import count
 def setup():
     size(666,700)
     sf = SoundFile(this,"theme.mp3")
     sf.loop()
 shape_list = []
+grid = [([False] * 10) for x in range(20)]
 newshape = False
 num = random.randrange(1,8)
-tempx = tempy = tempangle = None
 class block:
-    _ids = count(0)
     def __init__(self, shapenum, x, y, angle):
         self.shapenum = shapenum
         self.angle = angle
         self.x = x
         self.y = y
-        self.id = next(self._ids)
     def randnum(self):
         self.shapenum = random.randrange(1,8)
     def create_shape(self):
@@ -217,6 +214,17 @@ class block:
                 translate(self.x + 35, 630)
         tetro.create_shape()
     def copyshape(self):
+        global grid
+        if self.shapenum == 1:
+            if self.angle % 360 == 0:
+                grid[self.y/35][(self.x - 316)/35] = grid[(self.y/35) + 1][(self.x - 316)/35] = grid[(self.y/35) + 2][(self.x - 316)/35] = grid[(self.y/35) + 3][(self.x - 316)/35] = True
+            elif self.angle % 360 == 90:
+                grid[self.y/35][(self.x - 316)/35 - 1] = grid[self.y/35][(self.x - 316)/35 - 2] = grid[self.y/35][(self.x - 316)/35 - 3] = grid[self.y/35][(self.x - 316)/35 - 4] = True
+            elif self.angle % 360 == 180:
+                grid[self.y/35 - 1][(self.x - 316)/35 - 1] = grid[self.y/35 - 2][(self.x - 316) - 1] = grid[self.y/35 - 3][(self.x - 316) - 1] = grid[self.y/35 - 4][(self.x - 316) - 1] = True
+            elif self.angle % 360 == 270:
+                grid[self.y/35][(self.x - 316)/35] = grid[self.y/35][(self.x - 316)/35 + 1] = grid[self.y/35][(self.x - 316)/35 + 2] = grid[self.y/35][(self.x - 316)/35 + 3] = True
+        elif self.shapenum == 2:
         shape_list.append(copy.deepcopy(tetro))
         
     def reached_end(self):
@@ -227,9 +235,9 @@ class block:
         self.y = -140
         newshape = True
         self.angle = 0
-tetro = block(6, 421, -140, 0)
+tetro = block(1, 421, -140, 0)
 def draw():
-    global position, angle, num, newshape, shape_list, count
+    global position, angle, num, newshape, shape_list, count, grid
     strokeWeight(1)
     background(0)
     line(316, 0, 316, height)
@@ -238,7 +246,7 @@ def draw():
         line(i, 0 , i, height)
     for i in range(0, height, 35):
         line(316, i, width, i)
-        
+    
     tetro.stay()
     
     pushMatrix()
