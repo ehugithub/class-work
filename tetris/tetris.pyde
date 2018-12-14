@@ -1,8 +1,11 @@
+add_library('sound')
 import random
 import copy
 from itertools import count
 def setup():
     size(666,700)
+    file = SoundFile(this, "theme.mp3")
+    file.play()
 shape_list = []
 newshape = False
 num = random.randrange(1,8)
@@ -312,4 +315,4 @@ def keyPressed():
     elif keyCode == DOWN:
         tetro.angle -= 90
     elif key == ' ':
-        tetro.y += 35 
+        tetro.y += 35
