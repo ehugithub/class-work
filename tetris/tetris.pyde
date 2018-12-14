@@ -157,8 +157,11 @@ class block:
                 self.x = constrain(self.x, 316, width - 70)
                 self.y = constrain(self.y, 0, height - 70)
         elif self.shapenum == 6:
-            if self.angle % 360 == 0 or self.angle % 360 == 90:
+            if self.angle % 360 == 0:
                 self.x = constrain(self.x, 351, width - 70)
+                self.y = constrain(self.y, 0, height - 70)
+            elif self.angle % 360 == 90:
+                self.x = constrain(self.x, 316, width - 70)
                 self.y = constrain(self.y, 0, height - 70)
             elif self.angle % 360 == 270:
                 self.x = constrain(self.x, 316, width - 70)
@@ -212,6 +215,7 @@ class block:
         tetro.create_shape()
     def copyshape(self):
         shape_list.append(copy.deepcopy(tetro))
+        
     def reached_end(self):
         global newshape
         self.copyshape()
@@ -220,10 +224,9 @@ class block:
         self.y = 35
         newshape = True
         self.angle = 0
-tetro = block(3, 421, 35, 0)
+tetro = block(6, 421, 35, 0)
 def draw():
-    global position, angle, num, newshape, shape_list
-    global tempx, tempy, tempangle
+    global position, angle, num, newshape, shape_list, count
     strokeWeight(1)
     background(0)
     line(316, 0, 316, height)
@@ -241,10 +244,11 @@ def draw():
     popMatrix()
     
     pushMatrix()
-    # tetro.highlight()
+    tetro.highlight()
     popMatrix()
-    
-    tetro.y += 1
+
+    if frameCount % 10 == 0:
+        tetro.y += 35
     
     
     if tetro.shapenum == 1:
@@ -273,14 +277,21 @@ def draw():
             tetro.reached_end()
         elif tetro.angle % 360 == 270 and tetro.y >= height - 70:
             tetro.reached_end()
-    elif tetro.shapenum == 6 or tetro.shapenum == 7:
-        if tetro.angle % 360 == 0 or tetro.angle % 360 == 180:
+    elif tetro.shapenum == 6:
+        if tetro.angle % 360 != 270:
             if tetro.y >= height - 70:
                 tetro.reached_end()
-        elif tetro.angle % 360 == 90 and tetro.y >= height - 105:
-            tetro.reached_end()
-        elif tetro.angle % 360 == 90 and tetro.y >= height - 35:
-            tetro.reached_end()
+        else:
+            if tetro.y >= height - 105:
+                tetro.reached_end()
+    elif tetro.shapenum == 7:
+        if tetro.angle % 360 == 90:
+            if tetro.y >= height - 105:
+                tetro.reached_end()
+        elif tetro.angle % 360 != 90:
+            if tetro.y >= height - 70:
+                tetro.reached_end()
+    
     
     if newshape == True:
         for i in shape_list:
