@@ -6,7 +6,6 @@ def setup():
     sf = SoundFile(this,"theme.mp3")
     sf.loop()
 shape_list = []
-grid = [([False] * 10) for x in range(20)]
 newshape = False
 num = random.randrange(1,8)
 class block:
@@ -214,16 +213,6 @@ class block:
                 translate(self.x + 35, 630)
         tetro.create_shape()
     def copyshape(self):
-        global grid
-        if self.shapenum == 1:
-            if self.angle % 360 == 0:
-                grid[self.y/35][(self.x - 316)/35] = grid[(self.y/35) + 1][(self.x - 316)/35] = grid[(self.y/35) + 2][(self.x - 316)/35] = grid[(self.y/35) + 3][(self.x - 316)/35] = True
-            elif self.angle % 360 == 90:
-                grid[self.y/35][(self.x - 316)/35 - 1] = grid[self.y/35][(self.x - 316)/35 - 2] = grid[self.y/35][(self.x - 316)/35 - 3] = grid[self.y/35][(self.x - 316)/35 - 4] = True
-            elif self.angle % 360 == 180:
-                grid[self.y/35 - 1][(self.x - 316)/35 - 1] = grid[self.y/35 - 2][(self.x - 316) - 1] = grid[self.y/35 - 3][(self.x - 316) - 1] = grid[self.y/35 - 4][(self.x - 316) - 1] = True
-            elif self.angle % 360 == 270:
-                grid[self.y/35][(self.x - 316)/35] = grid[self.y/35][(self.x - 316)/35 + 1] = grid[self.y/35][(self.x - 316)/35 + 2] = grid[self.y/35][(self.x - 316)/35 + 3] = True
         elif self.shapenum == 2:
         shape_list.append(copy.deepcopy(tetro))
         
@@ -237,7 +226,7 @@ class block:
         self.angle = 0
 tetro = block(1, 421, -140, 0)
 def draw():
-    global position, angle, num, newshape, shape_list, count, grid
+    global position, angle, num, newshape, shape_list, count
     strokeWeight(1)
     background(0)
     line(316, 0, 316, height)
