@@ -3,13 +3,8 @@ import random
 import copy
 def setup():
     size(666,700)
-<<<<<<< HEAD
     #sf = SoundFile(this, "theme.mp3")
     #sf.loop()
-=======
-    sf = SoundFile(this,"theme.mp3")
-    sf.loop()
->>>>>>> d944e68c8874e6c8e1f856dd3e6b71f90de3fb10
 shape_list = []
 newshape = False
 num = random.randrange(1,8)
@@ -197,7 +192,6 @@ class block:
                 translate(self.x + 35, 630)
         tetro.create_shape()
     def copyshape(self):
-        elif self.shapenum == 2:
         shape_list.append(copy.deepcopy(tetro))
         
     def reached_end(self):
@@ -232,31 +226,6 @@ def draw():
     popMatrix()
 
     if frameCount % 10 == 0:
-<<<<<<< HEAD
-        for i in shape_list:
-            if i.shapenum == 1 and tetro.shapenum == 1:
-                if i.angle % 360 == 0 and tetro.angle % 360 == 0 and i.x == tetro.x and i.y == tetro.y + 140:
-                    tetro.reached_end()
-            elif i.shapenum == 1 and tetro.shapenum == 2:
-                if i.angle % 360 == 0 and i.y == tetro.y + 70 and i.x == tetro.x and i.x == tetro.x + 35:
-                    tetro.reached_end()
-            elif i.shapenum == 1 and tetro.shapenum == 3:
-                if i.angle % 360 == 0 and tetro.angle % 360 == 0 and i.y == tetro.y + 70 and i.x >= tetro.x - 35 and i.x <= tetro.x + 35:
-                    tetro.reached_end()
-            elif i.shapenum == 1 and tetro.shapenum == 4:
-                if i.angle % 360 == 0 and tetro.angle % 360 == 0 and i.y == tetro.y + 70 and i.x >= tetro.x and i.x <= tetro.x + 70:
-                    tetro.reached_end()
-            elif i.shapenum == 1 and tetro.shapenum == 5:
-                if i.angle % 360 == 0 and tetro.angle % 360 == 0 and i.y == tetro.y + 70 and i.x >= tetro.x and i.x <= tetro.x + 70:
-                    tetro.reached_end()
-            elif i.shapenum == 1 and tetro.shapenum == 6:
-                if i.angle % 360 == 0 and tetro.angle % 360 == 0: 
-                    if i.y == tetro.y + 70 and i.x == tetro.x - 35 and i.x == tetro.x:
-                        tetro.reached_end()
-                    elif i.y == tetro.y + 35 and i.x == tetro.x + 35:
-                        tetro.reached_end()
-=======
->>>>>>> d944e68c8874e6c8e1f856dd3e6b71f90de3fb10
         tetro.y += 35
     
     
