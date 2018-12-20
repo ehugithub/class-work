@@ -3,8 +3,13 @@ import random
 import copy
 def setup():
     size(666,700)
+<<<<<<< HEAD
     #sf = SoundFile(this, "theme.mp3")
     #sf.loop()
+=======
+    sf = SoundFile(this,"theme.mp3")
+    sf.loop()
+>>>>>>> d944e68c8874e6c8e1f856dd3e6b71f90de3fb10
 shape_list = []
 newshape = False
 num = random.randrange(1,8)
@@ -192,6 +197,7 @@ class block:
                 translate(self.x + 35, 630)
         tetro.create_shape()
     def copyshape(self):
+        elif self.shapenum == 2:
         shape_list.append(copy.deepcopy(tetro))
         
     def reached_end(self):
@@ -226,6 +232,7 @@ def draw():
     popMatrix()
 
     if frameCount % 10 == 0:
+<<<<<<< HEAD
         for i in shape_list:
             if i.shapenum == 1 and tetro.shapenum == 1:
                 if i.angle % 360 == 0 and tetro.angle % 360 == 0 and i.x == tetro.x and i.y == tetro.y + 140:
@@ -248,6 +255,8 @@ def draw():
                         tetro.reached_end()
                     elif i.y == tetro.y + 35 and i.x == tetro.x + 35:
                         tetro.reached_end()
+=======
+>>>>>>> d944e68c8874e6c8e1f856dd3e6b71f90de3fb10
         tetro.y += 35
     
     
@@ -256,7 +265,9 @@ def draw():
             tetro.reached_end()
         elif tetro.angle % 360 == 90 and tetro.y >= height - 35:
             tetro.reached_end()
-        elif tetro.angle % 360 == 180 or tetro.angle % 360 == 270 and tetro.y >= height - 70:
+        elif tetro.angle % 360 == 180 and tetro.y >= height - 70:
+            tetro.reached_end()
+        elif tetro.angle % 360 == 270 and tetro.y >= height - 70:
             tetro.reached_end()
     elif tetro.shapenum == 2:
         if tetro.y >= height - 70:
