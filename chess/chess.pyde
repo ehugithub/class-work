@@ -4,7 +4,6 @@ def setup():
     noStroke()
     size(1366, 700)
     font = createFont("https://drive.google.com/uc?export=download&id=0BwTQLXGKzDbZUmFkdEl0RW9IX2c",48)
-grid = [[0] * 8 for x in range(8)]
 grid = [[4, 2, 3, 5, 6, 3, 2, 4],
         [1, 1, 1, 1, 1, 1, 1, 1],
         [0, 0, 0, 0, 0, 0, 0, 0],
@@ -34,13 +33,18 @@ def draw():
                     fill(125, 135, 150)
                 else:
                     fill(232, 235, 239)
+            if mousePressed:
+                if grid[mouseY//100][(mouseX - 250) // 100] == 7:
+                    fill(50, 205, 50)
             rect(column * 100 + 250, row * 100, 100, 100)
             column += 1
             if column == 8:
                 column = 0
                 row += 1
             count += 1
-
+        
+    
+    
     
     textFont(font, 100)
     fill(0)
