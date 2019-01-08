@@ -36,8 +36,22 @@ def draw():
                     fill(232, 235, 239)
             if clickcount:
                 try:
-                    if grid[tempY//87][(tempX - 300)/87] == 7 and tempY//87 - 2 == row and (tempX - 300)/87 == column:# and tempY//87 - 3 == row and (tempX - 300)/87 == column:
-                        fill(50, 205, 50)
+                    if grid[tempY//87][(tempX - 300)/87] == 10:
+                        if tempY//87 == row and (tempX - 300)/87 == column:
+                            fill(164, 148, 128)
+                        elif (tempY//87 == row or (tempX - 300)/87 == column) and not grid[row][column]:
+                            fill(50, 205, 50)
+                    elif grid[tempY//87][(tempX - 300)/87] == 8:
+                        if tempY//87 == row and (tempX - 300)/87 == column:
+                            fill(164, 148, 128)
+                        elif (abs(tempY//87 - row) == 2 and abs((tempX - 300)/87 - column) == 1) and not grid[row][column]:
+                            fill(50, 205, 50)
+                    elif grid[tempY//87][(tempX - 300)/87] == 7:
+                        if tempY//87 == row and (tempX - 300)/87 == column:
+                            fill(164, 148, 128)
+                            # fill(250, 218, 94)
+                        elif tempY//87 - 2 == row and (tempX - 300)/87 == column or tempY//87 - 1 == row and (tempX - 300)/87 == column:
+                            fill(50, 205, 50)
                 except:
                     pass
             rect(column * 87 + 300, row * 87, 87, 87)

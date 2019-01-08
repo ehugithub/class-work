@@ -193,7 +193,6 @@ class block:
         tetro.create_shape()
     def copyshape(self):
         shape_list.append(copy.deepcopy(tetro))
-        
     def reached_end(self):
         global newshape
         self.copyshape()
@@ -202,7 +201,7 @@ class block:
         self.y = -140
         newshape = True
         self.angle = 0
-tetro = block(1, 421, -140, 0)
+tetro = block(num, 421, -140, 0)
 def draw():
     global position, angle, num, newshape, shape_list, count
     strokeWeight(1)

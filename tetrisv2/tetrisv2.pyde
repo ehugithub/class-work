@@ -1,8 +1,8 @@
-add_library('sound')
+# add_library('sound')
 def setup():
     size(666,700)
-    sf = SoundFile(this, "theme.mp3")
-    sf.loop()
+    # sf = SoundFile(this, "theme.mp3")
+    # sf.loop()
 
 class block:
     def __init__(self, num, x, y):
