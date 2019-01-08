@@ -4,7 +4,7 @@ def setup():
     clickcount = False
     background(255)
     size(1366, 700)
-    font = createFont("https://drive.google.com/uc?export=download&id=0BwTQLXGKzDbZUmFkdEl0RW9IX2c",48)
+    font = createFont("https://drive.google.com/uc?export=download&id=0BwTQLXGKzDbZUmFkdEl0RW9IX2c", 48)
 grid = [[4, 2, 3, 5, 6, 3, 2, 4],
         [1, 1, 1, 1, 1, 1, 1, 1],
         [0, 0, 0, 0, 0, 0, 0, 0],
@@ -39,6 +39,8 @@ def draw():
                     if grid[tempY//87][(tempX - 300)/87] == 10:
                         if tempY//87 == row and (tempX - 300)/87 == column:
                             fill(164, 148, 128)
+                        if not grid[row][column]:
+                            pass
                         elif (tempY//87 == row or (tempX - 300)/87 == column) and not grid[row][column]:
                             fill(50, 205, 50)
                     elif grid[tempY//87][(tempX - 300)/87] == 8:
@@ -50,7 +52,23 @@ def draw():
                         if tempY//87 == row and (tempX - 300)/87 == column:
                             fill(164, 148, 128)
                             # fill(250, 218, 94)
-                        elif tempY//87 - 2 == row and (tempX - 300)/87 == column or tempY//87 - 1 == row and (tempX - 300)/87 == column:
+                        if tempY//87 == 6:
+                            if tempY//87 - 2 == row and (tempX - 300)/87 == column or tempY//87 - 1 == row and (tempX - 300)/87 == column:
+                                fill(50, 205, 50)
+                        else:
+                            if tempY//87 - 1 == row and (tempX - 300)/87 == column:
+                                fill(50, 205, 50)
+                    elif grid[tempY//87][(tempX - 300)/87] == 9:
+                        if tempY//87 == row and (tempX - 300)/87 == column:
+                            fill(164, 148, 128)
+                        if not grid[row][column]:
+                            pass
+                        elif (abs(tempY//87 - row) == abs((tempX - 300)/87 - column)) and not grid[row][column]:
+                                  fill(50, 205, 50)
+                    elif grid[tempY//87][(tempX - 300)/87] == 12:
+                        if tempY//87 == row and (tempX - 300)/87 == column:
+                            fill(164, 148, 128)
+                        elif ((abs(tempY//87 - row) == abs((tempX - 300)/87 - column)) or (tempY//87 == row or (tempX - 300)/87 == column)) and not grid[row][column]:
                             fill(50, 205, 50)
                 except:
                     pass
