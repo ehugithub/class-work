@@ -1,7 +1,7 @@
 import copy
 def setup():
-    global font, clickcount
-    clickcount = False
+    global font, select_piece, move_piece
+    select_piece = move_piece = False
     background(255)
     size(1366, 700)
     font = createFont("https://drive.google.com/uc?export=download&id=0BwTQLXGKzDbZUmFkdEl0RW9IX2c", 48)
@@ -13,12 +13,12 @@ grid = [[4, 2, 3, 5, 6, 3, 2, 4],
         [0, 0, 0, 0, 0, 0, 0, 0],
         [7, 7, 7, 7, 7, 7, 7, 7],
         [10, 8, 9, 11, 12, 9, 8, 10]]
-tempX = tempY = None
+tempX = tempY = tempPiece = None
 def select_piece():
     pass
     
 def draw():
-    global font, tempX, tempY
+    global font, tempX, tempY, tempPiece, move_piece
     count = 0
     column = 0
     row = 0
@@ -34,41 +34,42 @@ def draw():
                     fill(125, 135, 150)
                 else:
                     fill(232, 235, 239)
-            if clickcount:
+            if select_piece:
                 try:
                     if grid[tempY//87][(tempX - 300)/87] == 10:
                         if tempY//87 == row and (tempX - 300)/87 == column:
                             fill(164, 148, 128)
-                        if not grid[row][column]:
-                            pass
                         elif (tempY//87 == row or (tempX - 300)/87 == column) and not grid[row][column]:
                             fill(50, 205, 50)
                     elif grid[tempY//87][(tempX - 300)/87] == 8:
                         if tempY//87 == row and (tempX - 300)/87 == column:
                             fill(164, 148, 128)
-                        elif (abs(tempY//87 - row) == 2 and abs((tempX - 300)/87 - column) == 1) and not grid[row][column]:
+                        elif ((abs(tempY//87 - row) == 2 and abs((tempX - 300)//87 - column) == 1) or (abs(tempY//87 - row) == 1 and abs((tempX - 300)//87 - column) == 2)) and not grid[row][column]:
                             fill(50, 205, 50)
                     elif grid[tempY//87][(tempX - 300)/87] == 7:
                         if tempY//87 == row and (tempX - 300)/87 == column:
                             fill(164, 148, 128)
                             # fill(250, 218, 94)
                         if tempY//87 == 6:
-                            if tempY//87 - 2 == row and (tempX - 300)/87 == column or tempY//87 - 1 == row and (tempX - 300)/87 == column:
+                            if (tempY//87 - 2 == row and (tempX - 300)//87 == column or tempY//87 - 1 == row and (tempX - 300)/87 == column) and not grid[row][column]:
                                 fill(50, 205, 50)
                         else:
-                            if tempY//87 - 1 == row and (tempX - 300)/87 == column:
+                            if (tempY//87 - 1 == row and (tempX - 300)/87 == column) and not grid[row][column]:
                                 fill(50, 205, 50)
                     elif grid[tempY//87][(tempX - 300)/87] == 9:
                         if tempY//87 == row and (tempX - 300)/87 == column:
                             fill(164, 148, 128)
-                        if not grid[row][column]:
-                            pass
                         elif (abs(tempY//87 - row) == abs((tempX - 300)/87 - column)) and not grid[row][column]:
-                                  fill(50, 205, 50)
-                    elif grid[tempY//87][(tempX - 300)/87] == 12:
+                            fill(50, 205, 50)
+                    elif grid[tempY//87][(tempX - 300)/87] == 11:
                         if tempY//87 == row and (tempX - 300)/87 == column:
                             fill(164, 148, 128)
                         elif ((abs(tempY//87 - row) == abs((tempX - 300)/87 - column)) or (tempY//87 == row or (tempX - 300)/87 == column)) and not grid[row][column]:
+                            fill(50, 205, 50)
+                    elif grid[tempY//87][(tempX - 300)/87] == 12:
+                        if tempY//87 == row and (tempX - 300)/87 == column:
+                            fill(164, 148, 128)
+                        elif (tempY//87 - 1 == row - 1 or tempY//87 - 1 == row or tempY//87 - 1 == row - 2) and ((tempX - 300)//87 == column + 1 or (tempX - 300)//87 == column or (tempX - 300)//87 == column - 1) and not grid[row][column]:
                             fill(50, 205, 50)
                 except:
                     pass
@@ -78,8 +79,13 @@ def draw():
                 column = 0
                 row += 1
             count += 1
-    
-    
+    if move_piece:
+        try:
+            grid[mouseY//87][(mouseX - 300)//87] = tempPiece
+            grid[tempY//87][(tempX - 300)/87] = 0
+        except:
+            pass
+        move_piece = False
     
     textFont(font, 87)
     fill(0)
@@ -110,10 +116,17 @@ def draw():
             elif grid[row][column] == 12:
                 text(u'\u2654', column * 87 + 300, (row + 1) * 87) # white King
 def mouseClicked():
-    global clickcount, tempX, tempY
-    if not clickcount:
-        clickcount = True
-        tempX = copy.copy(mouseX)
-        tempY = copy.copy(mouseY)
-    elif clickcount:
-        clickcount = False
+    global select_piece, move_piece, tempX, tempY, tempPiece
+    loadPixels()
+    if red(pixels[mouseX + mouseY * width]) == 50 and green(pixels[mouseX + mouseY * width]) == 205 and blue(pixels[mouseX + mouseY * width]) == 50:
+        move_piece = True
+    try:
+        if not select_piece and grid[mouseY//87][(mouseX - 300)//87]:
+            select_piece = True
+            tempPiece = copy.copy(grid[mouseY//87][(mouseX - 300)//87])
+            tempX = copy.copy(mouseX)
+            tempY = copy.copy(mouseY)
+        elif select_piece:
+            select_piece = False
+    except:
+        pass

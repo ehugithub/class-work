@@ -4,24 +4,9 @@ def setup():
     size(1366,700)
 
 r = g = b = None
-switch = True
 
-def mousePressed():
-    global switch
-    if switch == True:
-        switch = False
-    else:
-        switch = True
 def draw():
-    global r
-    global g
-    global b
-    global switch
-    global background
-    '''if switch == True:
-        loop()
-    else:
-        noLoop() '''
+    global r, g, b, background
     r = random.randrange(255)
     g = random.randrange(255)
     b = random.randrange(255)
