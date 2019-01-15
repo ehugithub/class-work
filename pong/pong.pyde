@@ -14,7 +14,7 @@ def start_game():
     global new_game, single_player, difficulty, leftscore, rightscore, no_players, button, display_rules
     leftscore = rightscore = 0
     strokeCap(ROUND)
-    strokeWeight(10)
+    strokeWeight(10)ra
     stroke(0)
     background(255)
     if display_rules:
@@ -159,7 +159,7 @@ def draw():
             velocity.y += 0.25
         elif velocity.y < 0:
             velocity.y -= 0.25
-        velocity.x *= -1
+        velocity.x *= -(random.uniform(0.9, 1.1))
         if location.x > 1331:
             location.x = 1331
         else:

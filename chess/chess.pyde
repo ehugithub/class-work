@@ -34,12 +34,15 @@ def draw():
                     fill(232, 235, 239)
             if select_piece:
                 try:
-                    if grid[tempY//87][(tempX - 300)/87] == 10:
+                    if grid[tempY//87][(tempX - 300)//87] == 10:
                         if tempY//87 == row and (tempX - 300)/87 == column:
                             fill(164, 148, 128)
                         elif (tempY//87 == row or (tempX - 300)/87 == column):
-                            if not grid[row][column]:
-                                fill(50, 205, 50)
+                            # why did i not loop through specific column/row, then if any is a piece, break the loop, no idea
+                            if grid[tempY//87 - 1][(tempX - 300)//87] and (tempX - 300)//87 == column and tempY//87 > row:
+                                    pass
+                            elif not grid[row][column]:
+                                    fill(50, 205, 50)
                             elif 0 < grid[row][column] < 7:
                                 fill(179, 25, 0)
                     elif grid[tempY//87][(tempX - 300)/87] == 8:
