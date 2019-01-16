@@ -38,7 +38,7 @@ def draw():
                         if tempY//87 == row and (tempX - 300)/87 == column:
                             fill(164, 148, 128)
                         elif (tempY//87 == row or (tempX - 300)/87 == column):
-                            # why did i not loop through specific column/row, then if any is a piece, break the loop, no idea
+                            # why i didn't loop through specific column/row, then if any is a piece, break the loop, no idea
                             if grid[tempY//87 - 1][(tempX - 300)//87] and (tempX - 300)//87 == column and tempY//87 > row:
                                     pass
                             elif not grid[row][column]:
@@ -58,7 +58,9 @@ def draw():
                             fill(164, 148, 128)
                             # fill(250, 218, 94)
                         if tempY//87 == 6:
-                            if (tempY//87 - 2 == row and (tempX - 300)//87 == column or tempY//87 - 1 == row and (tempX - 300)/87 == column) and not grid[row][column]:
+                            if grid[tempY//87 - 1][(tempX - 300)//87] and (tempX - 300)//87 == column and tempY//87 > row:
+                                    pass
+                            elif (tempY//87 - 2 == row and (tempX - 300)//87 == column or tempY//87 - 1 == row and (tempX - 300)/87 == column) and not grid[row][column]:
                                 fill(50, 205, 50)
                         else:
                             if (tempY//87 - 1 == row and (tempX - 300)/87 == column) and not grid[row][column]:
