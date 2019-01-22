@@ -212,7 +212,9 @@ def draw():
         line(i, 0 , i, height)
     for i in range(0, height, 35):
         line(316, i, width, i)
-    
+        
+    rect(0, height, 300, width)
+         
     tetro.stay()
     
     pushMatrix()
@@ -221,29 +223,11 @@ def draw():
     popMatrix()
     
     pushMatrix()
-    tetro.highlight()
+    # tetro.highlight()
     popMatrix()
-    
+        
     if frameCount % 10 == 0:
-        if tetro.shapenum == 1:
-            location = get(tetro.x + 15, tetro.y + 150)
-        elif tetro.shapenum == 2:
-            location = get(tetro.x + 15, tetro.y + 80)
-        elif tetro.shapenum == 3:
-            location = get(tetro.x + 15, tetro.y + 80)
-        elif tetro.shapenum == 4:
-            location = get(tetro.x + 15, tetro.y + 80)
-        elif tetro.shapenum == 5:
-            location = get(tetro.x + 15, tetro.y + 80)
-        elif tetro.shapenum == 6:
-            location = get(tetro.x + 15, tetro.y + 80)
-        elif tetro.shapenum == 7:
-            location = get(tetro.x + 15, tetro.y + 80)
-        print(red(location), green(location), blue(location))
-        if red(location) != 0 or green(location) != 0 or blue(location) != 0:
-            tetro.reached_end()
-        else:
-            tetro.y += 35
+        tetro.y += 35
     
     if tetro.shapenum == 1:
         if tetro.angle % 360 == 0 and tetro.y >= height - 140:
@@ -253,7 +237,7 @@ def draw():
         elif tetro.angle % 360 == 180 and tetro.y >= height - 70:
             tetro.reached_end()
         elif tetro.angle % 360 == 270 and tetro.y >= height - 70:
-            tetro.reached_end()
+            tetro.reached_end()    
     elif tetro.shapenum == 2:
         if tetro.y >= height - 70:
             tetro.reached_end()
@@ -292,6 +276,50 @@ def draw():
             translate(i.x + 35, i.y + 35)
             i.create_shape()
             popMatrix()
+    
+    location_list = []
+    if tetro.shapenum == 1:
+        if tetro.angle % 360 == 0:
+            location_list.append(get(tetro.x + 15, tetro.y + 150))
+        elif tetro.angle % 360 == 90:
+            location_list.append(get(tetro.x - 15, tetro.y + 45))
+            location_list.append(get(tetro.x - 50, tetro.y + 45))
+            location_list.append(get(tetro.x - 85, tetro.y + 45))
+            location_list.append(get(tetro.x - 120, tetro.y + 45))
+        elif tetro.angle % 360 == 180:
+            location_list.append(get(tetro.x - 15, tetro.y + 10))
+        elif tetro.angle % 360 == 270:
+            location_list.append(get(tetro.x + 15, tetro.y + 10))
+            location_list.append(get(tetro.x + 50, tetro.y + 10))
+            location_list.append(get(tetro.x + 85, tetro.y + 10))
+            location_list.append(get(tetro.x + 120, tetro.y + 10))
+    elif tetro.shapenum == 2:
+        location_list.append(get(tetro.x + 15, tetro.y + 80))
+        location_list.append(get(tetro.x + 50, tetro.y + 80))
+    elif tetro.shapenum == 3:
+        location_list.append(get(tetro.x + 15, tetro.y + 80))
+        location_list.append(get(tetro.x - 15, tetro.y + 80))
+        location_list.append(get(tetro.x + 50, tetro.y + 80))
+    elif tetro.shapenum == 4:
+        location_list.append(get(tetro.x + 15, tetro.y + 80))
+        location_list.append(get(tetro.x + 50, tetro.y + 80))
+        location_list.append(get(tetro.x + 85, tetro.y + 80))
+    elif tetro.shapenum == 5:
+        location_list.append(get(tetro.x + 15, tetro.y + 80))
+        location_list.append(get(tetro.x + 50, tetro.y + 80))
+        location_list.append(get(tetro.x + 85, tetro.y + 80))
+    elif tetro.shapenum == 6:
+        location_list.append(get(tetro.x - 15, tetro.y + 80))
+        location_list.append(get(tetro.x + 15, tetro.y + 80))
+        location_list.append(get(tetro.x + 50, tetro.y + 45))
+    elif tetro.shapenum == 7:
+        location_list.append(get(tetro.x + 15, tetro.y + 45))
+        location_list.append(get(tetro.x + 50, tetro.y + 80))
+        location_list.append(get(tetro.x + 85, tetro.y + 80))
+    for location in location_list:
+        if red(location) != 0 or green(location) != 0 or blue(location) != 0:
+            tetro.reached_end()
+            
 
 def keyPressed():
     global angle
